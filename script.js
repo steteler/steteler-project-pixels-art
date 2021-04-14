@@ -3,7 +3,7 @@ function createPalette(colors) {
 
   for (const index of colors) {
     const PALETTE_COLORS = document.createElement('div');
-    PALETTE_COLORS.className = 'pixel';
+    PALETTE_COLORS.className = 'color';
     PALETTE_COLORS.style.backgroundColor = index;
     PALETTE.appendChild(PALETTE_COLORS);
   }
