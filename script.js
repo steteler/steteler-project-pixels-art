@@ -3,10 +3,12 @@ const PIXEL_BOARD = document.getElementById('pixel-board');
 const SECTION_CONTAINER = document.getElementById('section-container');
 
 let corSelecionada = 'black';
+let lastTarget;
 
 window.onload = function () {
   createPaletteColors(['black', 'red', 'blue', 'green']);
   createPixels(25);
+  PALETTE.firstChild.classList.add('selected');
 
   PALETTE.addEventListener('click', colorSelected);
   PIXEL_BOARD.addEventListener('click', function () {
@@ -38,7 +40,17 @@ function createPixels(pixels) {
 // Vinicius: https://github.com/vinigofr
 // Alberto: https://github.com/AlbertoSCandido
 function colorSelected() {
-  corSelecionada = event.target.id;
+  if (lastTarget != event.target.id && lastTarget != undefined) {
+    lastTarget.classList.remove('selected');
+    corSelecionada = event.target.id;
+    lastTarget = event.target.classList.add('selected');
+  }
+  else {
+    lastTarget = event.target;
+    PALETTE.firstChild.classList.remove('selected');
+    colorSelected();
+  }
+  lastTarget = event.target;
 }
 
 function changePixelColor(color) {
