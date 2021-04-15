@@ -29,13 +29,12 @@ function createPixels(pixels) {
 // código abaixo resolvido com a ajuda de Alberto e Vinicius
 // Vinicius: https://github.com/vinigofr
 // Alberto: https://github.com/AlbertoSCandido
-function colorSelected() {
+function colorSelected(event) {
   if (lastTarget !== event.target.id && lastTarget !== undefined) {
     lastTarget.classList.remove('selected');
     corSelecionada = event.target.id;
-    lastTarget = event.target.classList.add('selected');
-  }
-  else {
+    event.target.classList.add('selected');
+  } else {
     lastTarget = event.target;
     PALETTE.firstChild.classList.remove('selected');
     colorSelected();
@@ -43,8 +42,8 @@ function colorSelected() {
   lastTarget = event.target;
 }
 
-function changePixelColor(color) {
-  event.target.style.backgroundColor = color;
+function changePixelColor(event) {
+  event.target.style.backgroundColor = corSelecionada;
 }
 
 function clearBoard() {
@@ -53,14 +52,12 @@ function clearBoard() {
   }
 }
 
-window.onload = function () {
+window.onload = () => {
   createPaletteColors(['black', 'red', 'blue', 'green']);
   createPixels(25);
   PALETTE.firstChild.classList.add('selected');
 
   PALETTE.addEventListener('click', colorSelected);
-  PIXEL_BOARD.addEventListener('click', function () {
-    changePixelColor(corSelecionada);
-  });
+  PIXEL_BOARD.addEventListener('click', changePixelColor);
   CLEAR_BUTTON.addEventListener('click', clearBoard);
-}
+};
