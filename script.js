@@ -1,6 +1,20 @@
-function createPalette(colors) {
-  const PALETTE = document.getElementById('color-palette');
+const PALETTE = document.getElementById('color-palette');
+const PIXEL_BOARD = document.getElementById('pixel-board');
+const SECTION_CONTAINER = document.getElementById('section-container');
 
+window.onload = function() {
+  createPaletteColors(['black', 'red', 'blue', 'green']);
+  createPixels(25);
+
+
+
+  PALETTE.addEventListener('click', colorSelected);
+  PIXEL_BOARD.addEventListener('click', function() {
+    changePixelColor(colorSelected());
+  });
+}
+
+function createPaletteColors(colors) {
   for (const index of colors) {
     const PALETTE_COLORS = document.createElement('div');
     PALETTE_COLORS.className = 'color';
@@ -9,12 +23,7 @@ function createPalette(colors) {
   }
 }
 
-createPalette(['black', 'red', 'blue', 'green']);
-
 function createPixels(pixels) {
-  const PIXEL_BOARD = document.getElementById('pixel-board');
-  const SECTION_CONTAINER = document.getElementById('section-container');
-
   SECTION_CONTAINER.style.width = `${40 * Math.sqrt(pixels)}px`;
 
   for (let index = 0; index < pixels; index += 1) {
@@ -24,4 +33,10 @@ function createPixels(pixels) {
   }
 }
 
-createPixels(25);
+function colorSelected() {
+  return event.target.style.backgroundColor;
+}
+
+function changePixelColor(color) {
+  event.target.style.backgroundColor = color;
+}
