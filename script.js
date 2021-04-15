@@ -1,6 +1,7 @@
 const PALETTE = document.getElementById('color-palette');
 const PIXEL_BOARD = document.getElementById('pixel-board');
 const SECTION_CONTAINER = document.getElementById('section-container');
+const CLEAR_BUTTON = document.getElementById('clear-board');
 
 let corSelecionada = 'black';
 let lastTarget;
@@ -14,6 +15,7 @@ window.onload = function () {
   PIXEL_BOARD.addEventListener('click', function () {
     changePixelColor(corSelecionada);
   });
+  CLEAR_BUTTON.addEventListener('click', clearBoard);
 }
 
 function createPaletteColors(colors) {
@@ -55,4 +57,10 @@ function colorSelected() {
 
 function changePixelColor(color) {
   event.target.style.backgroundColor = color;
+}
+
+function clearBoard() {
+  for (const index of PIXEL_BOARD.children) {
+    index.style.backgroundColor = 'white';
+  }
 }
