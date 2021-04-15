@@ -6,18 +6,6 @@ const CLEAR_BUTTON = document.getElementById('clear-board');
 let corSelecionada = 'black';
 let lastTarget;
 
-window.onload = function () {
-  createPaletteColors(['black', 'red', 'blue', 'green']);
-  createPixels(25);
-  PALETTE.firstChild.classList.add('selected');
-
-  PALETTE.addEventListener('click', colorSelected);
-  PIXEL_BOARD.addEventListener('click', function () {
-    changePixelColor(corSelecionada);
-  });
-  CLEAR_BUTTON.addEventListener('click', clearBoard);
-}
-
 function createPaletteColors(colors) {
   for (const index of colors) {
     const PALETTE_COLORS = document.createElement('div');
@@ -42,7 +30,7 @@ function createPixels(pixels) {
 // Vinicius: https://github.com/vinigofr
 // Alberto: https://github.com/AlbertoSCandido
 function colorSelected() {
-  if (lastTarget != event.target.id && lastTarget != undefined) {
+  if (lastTarget !== event.target.id && lastTarget !== undefined) {
     lastTarget.classList.remove('selected');
     corSelecionada = event.target.id;
     lastTarget = event.target.classList.add('selected');
@@ -63,4 +51,16 @@ function clearBoard() {
   for (const index of PIXEL_BOARD.children) {
     index.style.backgroundColor = 'white';
   }
+}
+
+window.onload = function () {
+  createPaletteColors(['black', 'red', 'blue', 'green']);
+  createPixels(25);
+  PALETTE.firstChild.classList.add('selected');
+
+  PALETTE.addEventListener('click', colorSelected);
+  PIXEL_BOARD.addEventListener('click', function () {
+    changePixelColor(corSelecionada);
+  });
+  CLEAR_BUTTON.addEventListener('click', clearBoard);
 }
