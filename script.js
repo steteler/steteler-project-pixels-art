@@ -30,16 +30,21 @@ function createPixels(pixels) {
 // Vinicius: https://github.com/vinigofr
 // Alberto: https://github.com/AlbertoSCandido
 function colorSelected(event) {
-  if (lastTarget !== event.target.id && lastTarget !== undefined) {
+  if (corSelecionada !== event.target.id) {
     lastTarget.classList.remove('selected');
-    corSelecionada = event.target.id;
-    event.target.classList.add('selected');
-  } else {
     lastTarget = event.target;
-    PALETTE.firstChild.classList.remove('selected');
-    colorSelected();
+    corSelecionada = event.target.id;
+    selectCurrentColor();
   }
-  lastTarget = event.target;
+}
+
+function selectCurrentColor() {
+  for(let index of PALETTE.children) {
+    if (corSelecionada === index.id) {
+      index.classList.add('selected');
+      lastTarget = index;
+    }
+  }
 }
 
 function changePixelColor(event) {
@@ -55,7 +60,7 @@ function clearBoard() {
 window.onload = () => {
   createPaletteColors(['black', 'red', 'blue', 'green']);
   createPixels(25);
-  PALETTE.firstChild.classList.add('selected');
+  selectCurrentColor();
 
   PALETTE.addEventListener('click', colorSelected);
   PIXEL_BOARD.addEventListener('click', changePixelColor);
