@@ -26,6 +26,15 @@ function createPixels(pixels) {
   }
 }
 
+function selectCurrentColor() {
+  for (const index of PALETTE.children) {
+    if (corSelecionada === index.id) {
+      index.classList.add('selected');
+      lastTarget = index;
+    }
+  }
+}
+
 // código abaixo resolvido com a ajuda de Alberto e Vinicius
 // Vinicius: https://github.com/vinigofr
 // Alberto: https://github.com/AlbertoSCandido
@@ -38,17 +47,9 @@ function colorSelected(event) {
   }
 }
 
-function selectCurrentColor() {
-  for(let index of PALETTE.children) {
-    if (corSelecionada === index.id) {
-      index.classList.add('selected');
-      lastTarget = index;
-    }
-  }
-}
-
 function changePixelColor(event) {
-  event.target.style.backgroundColor = corSelecionada;
+  const EVENTO = event.target;
+  EVENTO.style.backgroundColor = corSelecionada;
 }
 
 function clearBoard() {
