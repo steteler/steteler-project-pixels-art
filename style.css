@@ -2,15 +2,23 @@
   box-sizing: border-box;
 }
 
-#color-palette div {
-  margin: 2px;
+#section-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#section-container button, #section-container section {
+  margin: 8px 0;
 }
 
 #color-palette , #pixel-board {
-  display: flex;
+  display: inline-flex;
   flex-wrap: wrap;
-  justify-content: center;
-  margin: 16px 0 0;
+}
+
+#color-palette div {
+  margin: 2px;
 }
 
 .pixel , .color {
